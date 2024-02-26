@@ -1,6 +1,6 @@
 //Including packages needed for this application
-const fs = require("fs");
-const inquirer = require("inquirer");
+const fs = require('fs');
+const inquirer = require('inquirer');
 const path = require("path");
 const generateMarkdown = require("./Asset/generateMarkdown");
 
@@ -73,14 +73,30 @@ const questions = [
 
 // Writing README.md File
 function writeToFile(fileName, data) {
-    return fs.writeFileSync(path.join(process.cwd(), fileName), data);
+    fs.writeFile(fileName, data, (err) => {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log('README file created successfully!');
+        }
+    });
 }
 
 // Initializing app
 function init() {
-    inquirer.prompt(questions).then((responses) => {
-        console.log("Creating Professional README.md File...");
-        writeToFile("./README.md", generateMarkdown({ ...responses }));
-    });
+    inquirer
+        .prompt(questions)
+        .then((answers) => {
+            // Generate markdown based on user answers
+            const markdown = generateMarkdown(answers);
+
+            // Write markdown to README file
+            writeToFile('README.md', markdown);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
 }
+
+// Function call to initialize app
 init();
