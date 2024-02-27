@@ -1,8 +1,8 @@
 //Including packages needed for this application
-const inquirer = require('inquirer');
-const fs = require('fs');
+const fs = require("fs");
+const inquirer = require("inquirer");
 const path = require("path");
-const generateMarkdown = require('./Asset/generateMarkdown');
+const generateMarkdown = require("./Utils/generateMarkdown");
 
 //Creating an array of questions for user input
 const questions = [
@@ -66,7 +66,7 @@ function writeToFile(fileName, data) {
 function init() {
     inquirer.prompt(questions).then((responses) => {
         console.log("Creating Professional README.md File...");
-        writeToFile("./README.md", generateMarkdown({ ...responses }));
+        writeToFile("./dist/README.md", generateMarkdown({ ...responses }));
     });
 }
 init();
