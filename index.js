@@ -1,6 +1,7 @@
 //Including packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
+const path = require("path");
 const generateMarkdown = require('./Asset/generateMarkdown');
 
 //Creating an array of questions for user input
@@ -15,16 +16,7 @@ const questions = [
         name: "description",
         message: "Please describe the purpose and functionality of this project.",
     },
-    {
-        type: "input",
-        name: "screenshot",
-        message: "Please provide the relative path to the image you want to use as the screenshot."
-    },
-    {
-        type: "input",
-        name: "link",
-        message: "Please provide a URL where a user can access your deployed application."
-    },
+
     {
         type: "checkbox",
         name: "license",
@@ -35,11 +27,6 @@ const questions = [
         type: "input",
         name: "require",
         message: "List any project dependencies here.",
-    },
-    {
-        type: "input",
-        name: "features",
-        message: "List some cool features about this project here.",
     },
     {
         type: "input",
